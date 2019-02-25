@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/config/init.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/water-a/cen3031-project/issues"
   },
-  "homepage": "https://github.com/water-a/cen3031-project#readme"
+  "homepage": "https://github.com/water-a/cen3031-project#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
