@@ -3,7 +3,8 @@ const mongoose = require('mongoose'),
 
 let exampleSchema = new Schema({
     example: String,
-    hello: String
+    hello: String,
+    hello2: String
 });
 
 let Example = mongoose.model('Example', exampleSchema);
