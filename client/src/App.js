@@ -1,42 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { PromiseProvider } from 'mongoose';
+import logo from './img/logo.png';
 
-class Slider extends Component {
+import { UploadBox } from './components/UploadBox/index';
 
-  renderContentSlider(cnt){
-    return(
-      <button className = 'content-slider'> 
-        {cnt}
-      </button>
+import { Image } from 'office-ui-fabric-react/lib/Image';
 
-    )
-   
-  }
+class App extends Component {
   render() {
     return (
-      <div>
-        {this.renderContentSlider("madison")}
+      <div className="Upload">
+        <Image
+          src={logo}
+          height="300px"
+          width="300px"
+          alt="Example implementation with no image fit property and no height or width is specified."
+        />
+        <UploadBox />
       </div>
-      // <div className="App">
-      //   <header className="App-header">
-      //     <img src={logo} className="App-logo" alt="logo" />
-      //     <p>
-      //       Edit <code>src/.js</code> and save to reload.
-      //     </p>
-      //     <a
-      //       className="App-link"
-      //       href="https://reactjs.org"
-      //       target="_blank"
-      //       rel="noopener noreferrer"
-      //     >
-      //       Learn React
-      //     </a>
-      //   </header>
-      // </div>
     );
   }
 }
 
-export default Slider;
+export default App;
