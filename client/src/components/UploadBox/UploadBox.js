@@ -31,7 +31,8 @@ class UploadBox extends Component {
           image: 'http://placehold.it/150x150'
         }
       ],
-      backVisible: false
+      backVisible: false,
+      reciept: false
     };
   }
   
@@ -39,7 +40,7 @@ class UploadBox extends Component {
     // Split into component
     return (
       <div className="ListItem">
-        <Image src={item.image} />
+        <Image width="100%" src={item.image} />
         <span className="ListName">{item.name}</span>
       </div>
     );
@@ -52,28 +53,34 @@ class UploadBox extends Component {
   }
 
   _materialNextClicked = () => {
-    this.setState({
-      title: 'Select your size',
-      items: [
-        {
-          name: '320x320',
-          image: 'http://placehold.it/150x150'
-        },
-        {
-          name: '150x150',
-          image: 'http://placehold.it/150x150'
-        },
-        {
-          name: '80x90',
-          image: 'http://placehold.it/150x150'
-        },
-        {
-          name: '10x10',
-          image: 'http://placehold.it/150x150'
-        },
-      ],
-      backVisible: true
-    });
+    if (this.state.backVisible){
+      this.setState({
+        reciept: true
+      });
+    } else {
+      this.setState({
+        title: 'Select your size',
+        items: [
+          {
+            name: '320x320',
+            image: 'http://placehold.it/150x150'
+          },
+          {
+            name: '150x150',
+            image: 'http://placehold.it/150x150'
+          },
+          {
+            name: '80x90',
+            image: 'http://placehold.it/150x150'
+          },
+          {
+            name: '10x10',
+            image: 'http://placehold.it/150x150'
+          },
+        ],
+        backVisible: true
+      });
+    }
   }
 
   _sizeBackClicked = () => {
@@ -104,7 +111,10 @@ class UploadBox extends Component {
   render() {
     let content = (
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <Text style={{textAlign: "center", display: "block"}} variant="xLarge">Print your thingy today!!!</Text>
+        <Text style={{textAlign: "center", display: "block"}} variant="xxLarge">Welcome to Petree's Prints</Text>
+        <br />
+        <Text variant="mediumPlus">Get your extraordinarily large prints printed today with Petree's Prints!<br /><br />We are a local Gainesville print shop that specializes in large prints!</Text>
+        <br />
         <CompoundButton
           primary={true}
           secondaryText="get your posters today"
@@ -114,7 +124,24 @@ class UploadBox extends Component {
         </CompoundButton>
       </div>
     );
-    if (!this.state.start){
+    if (this.state.reciept){
+      content = (
+        <div>
+          <div style={{padding: "10px"}}>
+            <Text variant="xLarge">Your receipt:</Text>
+            <br />
+            <Image src="http://placehold.it/150x150" />
+            <Text variant="medium">320x320 - $40</Text>
+            
+          </div>
+          <br />
+          <PrimaryButton
+            style={{display: "block", margin: "20px auto"}}
+            text="Continue to PayPal"
+          />
+        </div>
+      );
+    } else if (!this.state.start){
       content = (
         <div>
           <Text variant="xLarge">{this.state.title}</Text>
