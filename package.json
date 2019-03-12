@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"nodemon server/config/init.js\" \"cd client; npm start\"",
-    "postinstall": "cd client && npm install"
+    "postinstall": "npm install --prefix ./client"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.15",
     "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }
