@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"nodemon server/config/init.js\" \"cd client; npm run build\"",
+    "start": "concurrently \"node server/config/init.js\" \"cd client; npm run build\"",
     "postinstall": "npm install --prefix ./client"
   },
   "repository": {
