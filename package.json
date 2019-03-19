@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start",
     "start": "concurrently \"node server/config/init.js\" \"cd client && serve -s build\"",
+    "test": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start\"",
     "postinstall": "npm install --prefix ./client"
   },
   "repository": {
