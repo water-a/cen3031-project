@@ -111,18 +111,18 @@ class UploadBox extends Component {
   render() {
     let content = (
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <Text style={{textAlign: "center", display: "block"}} variant="xxLarge">Welcome to Petree's Prints</Text>
+        <Text style={{ textAlign: "center", display: "block", fontWeight: "bold"}} variant="xxLarge">Welcome to Petree's Prints</Text>
         <br />
         <Text variant="mediumPlus">Get your extraordinarily large prints printed today with Petree's Prints!<br /><br />We are a local Gainesville print shop that specializes in large prints!</Text>
         <br />
-        <CompoundButton
-          primary={true}
-          secondaryText="get your posters today"
-          onClick={this._uploadNowClicked}
-        >
-          Upload now!
-        </CompoundButton>
-      </div>
+
+          <div className="upload-btn-wrapper">
+            <button className="btn" >Upload a file
+            <input type="file" name="myfile" onClick={this._uploadNowClicked}/>
+            </button>
+          </div>
+          
+        </div>
     );
     if (this.state.reciept){
       content = (

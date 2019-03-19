@@ -12,8 +12,8 @@ class App extends Component {
       <div className="Upload">
         <Image
           src={logo}
-          height="150px"
-          width="150px"
+          height="400px"
+          width="500px"
           alt="Example implementation with no image fit property and no height or width is specified."
         />
         <UploadBox />
