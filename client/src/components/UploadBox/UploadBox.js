@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './UploadBox.css';
+<<<<<<< HEAD
 import { ImageUpload } from '../ImageUpload/index.js';
+=======
+>>>>>>> 01a0eb7719018cfd00bae0c44c9f4eaac249829b
 
 import { Text } from 'office-ui-fabric-react/lib/Text';
 import { List } from 'office-ui-fabric-react/lib/List';
@@ -117,7 +120,16 @@ class UploadBox extends Component {
         <Text variant="mediumPlus">Get your extraordinarily large prints printed today with Petree's Prints!<br /><br />We are a local Gainesville print shop that specializes in large prints!</Text>
         <br />
 
+<<<<<<< HEAD
           <ImageUpload next={this._uploadNowClicked} />
+=======
+          <div className="upload-btn-wrapper">
+            <button className="btn" >Upload a file
+            <input type="file" name="myfile" onClick={this._uploadNowClicked}/>
+            </button>
+          </div>
+          
+>>>>>>> 01a0eb7719018cfd00bae0c44c9f4eaac249829b
         </div>
     );
     if (this.state.reciept){
