@@ -1,0 +1,46 @@
+
+
+
+/* .photo-upload-wrapper{
+    width: 100%;
+    display: block;
+    border: 1px #0432ff solid;
+} */
+
+.upload-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .photo-choice-btn {
+    border: 1px solid rgb(255, 161, 205);
+    color: rgb(255, 161, 205);
+    background-color: white;
+    margin: 5px;
+    padding: 4px 20px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .photo-choice-btn:hover {
+    box-shadow: 0 0 0 2px rgba(255, 179, 216, 0.2); 
+    border-radius: 5px;
+  }
+
+   input[type="file"] {
+    display: none;
+   }
+  
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  
