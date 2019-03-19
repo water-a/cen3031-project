@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"node server/config/init.js\" \"cd client && serve -s build\"",
-    "test": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start\"",
+    "testmac": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start\"",
+    "testwindows": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start-windows\"",
     "postinstall": "npm install --prefix ./client"
   },
   "repository": {
