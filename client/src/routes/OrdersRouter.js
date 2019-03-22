@@ -4,8 +4,7 @@ import { Route, Link } from 'react-router-dom';
 import { Image } from 'office-ui-fabric-react/lib/Image';
 
 import logo from '../img/logo.png';
-import OrderForm from '../pages/OrderForm';
-import Help from '../pages/Help';
+import { OrderForm, Help, Dashboard, About } from '../pages';
 
 const OrdersRouter = (props) => (
     <div style={{
@@ -18,7 +17,11 @@ const OrdersRouter = (props) => (
         <Link to= "/" >
             <Image src={logo} height="400px" width="500px" /> 
         </Link>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/help">Help</Link>
         <Route exact path={props.match.path} component={OrderForm}/>
+        <Route exact path={`${props.match.path}about`} component={About}/>
         <Route exact path={`${props.match.path}help`} component={Help}/>
     </div>
 );
