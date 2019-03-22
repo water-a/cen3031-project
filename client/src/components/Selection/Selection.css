@@ -1,0 +1,23 @@
+:root {
+    --main-pink: rgb(255, 215, 231);
+}  
+
+
+
+.selection_pane{
+    border: 2px solid var(--main-pink);
+    height: 500px;
+    width:500px;
+}
+
+.choice{
+    border: 2px solid var(--main-pink);
+    border-radius: 30px;
+    width: 30%;
+    float: center;
+    text-align: center;
+}
+
+.choice:hover{
+    background: var(--main-pink);
+}
