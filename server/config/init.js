@@ -1,7 +1,8 @@
 const express = require('express'),
       mongoose = require('mongoose'),
       morgan = require('morgan'),
-      config = require('./config');
+      config = require('./config'),
+      bodyParser = require('body-parser');
 
 mongoose.connect(config.db.uri, {useNewUrlParser: true});
 
@@ -10,6 +11,13 @@ db.once('open', console.info.bind(console, 'DATABASE: Successfully connected to 
 db.on('error', console.error.bind(console, 'DATABASE [error]: '))
     
 var app = express();
+
+// Parse post data
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+ 
+// parse application/json
+app.use(bodyParser.json());
 
 // Logs requests
 app.use(morgan('dev'));
