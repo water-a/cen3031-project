@@ -15,7 +15,7 @@ const OrdersRouter = (props) => (
           flexDirection: 'column'
         }}>
         <Link to= "/" >
-            <Image src={logo} height="400px" width="500px" /> 
+            <Image src={logo} height="200px" width="200px" /> 
         </Link>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
