@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import { Image } from 'office-ui-fabric-react/lib/Image';
 
@@ -15,7 +15,9 @@ const OrdersRouter = (props) => (
           alignItems: 'center',
           flexDirection: 'column'
         }}>
-        <Image src={logo} height="400px" width="500px" />      
+        <Link to= "/" >
+            <Image src={logo} height="400px" width="500px" /> 
+        </Link>
         <Route exact path={props.match.path} component={OrderForm}/>
         <Route exact path={`${props.match.path}help`} component={Help}/>
     </div>
