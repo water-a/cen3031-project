@@ -6,8 +6,7 @@
   "scripts": {
     "start": "concurrently \"node server/config/init.js\" \"cd client && serve -s build\"",
     "testmac": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start\"",
-    "testwindows": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start-windows\"",
-    "postinstall": "npm install --prefix ./client"
+    "testwindows": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start-windows\""
   },
   "repository": {
     "type": "git",
