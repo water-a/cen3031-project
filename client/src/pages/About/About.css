@@ -1,0 +1,24 @@
+.AboutWrapper{
+    width: 75%;
+    text-align: center;
+}
+.AboutWrapper p{
+    color: #53350a;
+    font-size:15px;
+}
+
+.AboutWrapper h1{
+    color:#53350a;
+    font-size:30px;
+}
+
+.AboutWrapper h2{
+    color:#53350a;
+    font-size:20px;
+}
+
+
+.ms-Image {
+    margin: 0 auto;
+    border-radius:50%;
+}
