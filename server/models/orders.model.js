@@ -18,7 +18,15 @@ let orderSchema = new Schema({
         addrLine1: String,
         addrLine2: String
     },
-    completed: Boolean
+    completed:{
+        type: Boolean,
+        default: false
+    }, 
+    Refund: {
+        type: Boolean,
+        default: false
+    }
+
 }, {timestamps: true});
 
 let Order = mongoose.model('Order', orderSchema);
