@@ -4,11 +4,11 @@ const mongoose = require('mongoose'),
 
 exports.create = (request, response) => {
     //create new order in the db after validating all options, redirect to /checkout
-    var order = new Order(req.body);
+    var order = new Order(request.body);
     order.save(function (err) {
         if (err) {
             console.log(err);
-            resizeBy.status(400).send(err);
+            response.status(400).send(err);
         }
         else {
             //redirect?

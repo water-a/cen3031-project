@@ -17,7 +17,8 @@ let orderSchema = new Schema({
     shippingAddress: {
         addrLine1: String,
         addrLine2: String
-    }
+    },
+    completed: Boolean
 }, {timestamps: true});
 
 let Order = mongoose.model('Order', orderSchema);
