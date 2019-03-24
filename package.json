@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"node server/config/init.js\" \"cd client && serve -s build\"",
-    "testmac": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start\"",
-    "testwindows": "concurrently \"nodemon server/config/init.js\" \"cd client && npm run start-windows\"",
-    "postinstall": "npm install --prefix ./client"
+    "start": "npm-run-all --parallel build server",
+    "test": "npm-run-all --parallel client server",
+    "client": "cd client && npm start",
+    "server": "node server/config/init",
+    "build": "cd client && serve -s build"
   },
   "repository": {
     "type": "git",
@@ -20,12 +21,14 @@
   },
   "homepage": "https://github.com/water-a/cen3031-project#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "mongoose": "^5.4.15",
-    "morgan": "^1.9.1",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
     "nodemon": "^1.18.10",
+    "npm-run-all": "^4.1.5",
     "serve": "^10.1.2"
   }
 }
