@@ -12,6 +12,7 @@ exports.create = (request, response) => {
         }
         else {
             //redirect?
+            response.send("hello");
         }
     })
 }
@@ -39,27 +40,47 @@ exports.listorders = (request, response) => {
  }
  */
 
-exports.update = (request, response) => {
-  
-    //Also to use to update whether the order has been completed, update the boolean to "True" on complete
-    Order.findOneAndUpdate({Id: req.params._id}, function(err){
-        if(err) response.status(400).send(err);
-        else response.status(200).{Completed: True}
+exports.read = (request, response) => {
+    Order.findById(request.params.orderId, function(err, order) {
+        if (err) response.status(400).send(err);
+        else response.status(200).json(order);
     })
+}
 
-    //If the customer refunds
-    Order.findOneAndUpdate({Id: req.params._id}, function(err){
-        
-        if(err) response.status(400).send(err);
-        else response.status(200).{Refund: True}
-    })
+exports.update = (request, response) => {
 
     //update order in case of alter in order after it has been processed
 
-    Order.findOneAndUpdate({Id: req.params._id}, function(err){
+    Order.findByIdAndUpdate(request.params.orderId, request.body, function(err){
         if(err) response.status(400).send(err);
-        else response.status(200)
+        else response.status(200).send("ok");
     })    
+}
+
+exports.complete = (request, response) => {
+    //Also to use to update whether the order has been completed, update the boolean to "True" on complete
+    Order.findByIdAndUpdate(request.params.orderId, {completed: true}, function(err){
+        if(err) response.status(400).send(err);
+        else response.status(200).send("ok");
+    })
+}
+
+exports.refund = (request, response) => {
+    //If the customer refunds
+    Order.findByIdAndUpdate(request.params.orderId, {Refund: true}, function(err){
+        if(err) response.status(400).send(err);
+        else response.status(200).send("ok");
+    })
+}
+
+exports.orderByID = (request, response, next, id) => {
+    Order.findById(id).exec(function(err, order) {
+        if (err) response.status(400).send(err);
+        else {
+            request.order = order;
+            next();
+        }
+    });
 }
 
 getEstimate = (material, size) =>{
