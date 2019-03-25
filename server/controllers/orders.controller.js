@@ -3,16 +3,29 @@ const mongoose = require('mongoose'),
       Setting = require('../models/settings.model');
 
 exports.create = (request, response) => {
+    var setting;
     //create new order in the db after validating all options, redirect to /checkout
-    var order = new Order(request.body);
-    order.save(function (err) {
-        if (err) {
-            console.log(err);
-            response.status(400).send(err);
-        }
+    Setting.find({}, function(err, settings) { 
+        if (err) response.status(400).send(err);
         else {
-            //redirect?
-            response.send("hello");
+            setting = settings;
+            console.log(setting[0].material);
+            var order = new Order(request.body);
+            console.log(order.material);
+            for (var i = 0; i < setting.length; i++) {
+                console.log(order.material);
+                console.log(order.size.height);
+                console.log(setting[i]);
+                if ((order.material == setting[i].material) && (order.size.height == setting[i].size.height) && (order.size.width == setting[i].size.width)) {
+                    console.log("hello");
+                    order.save(function (err) {
+                        if (err) response.status(400).send(err);
+                        else {
+                            response.status(200).send("ok");
+                        }
+                    })
+                }
+            }
         }
     })
 }
