@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './OrderForm.css';
-import UploadBox from '../../components/UploadBox';
+import { UploadBox } from '../../components/UploadBox';
 
 class App extends Component {
   render() {
