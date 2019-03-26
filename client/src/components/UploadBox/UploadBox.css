@@ -1,0 +1,15 @@
+.Dropzone
+{
+    border: 2px dashed #00F4AC;
+    border-radius: 5px;
+}
+.Dropzone>.Message
+{
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    margin: 2em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
