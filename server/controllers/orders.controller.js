@@ -2,32 +2,51 @@ const mongoose = require('mongoose'),
       Order = require('../models/orders.model'),
       Setting = require('../models/settings.model');
 
-exports.create = (request, response) => {
-    var setting;
+exports.create = async (request, response) => {
+    let settings;
+    let order = new Order(request.body);
+    try {
+        settings = await Setting.findOne();
+    }
+    catch (error) {
+        console.log(error);
+    }
+    console.log(settings);
+    console.log(order.size);
+    console.log(settings.size[0]);//compare sizes together
+    if (settings.material.indexOf(order.material) >= 0) {
+        response.send('yeet');
+    }
+    else {
+        response.send('lol');
+    }
     //create new order in the db after validating all options, redirect to /checkout
-    Setting.find({}, function(err, settings) { 
-        if (err) response.status(400).send(err);
-        else {
-            setting = settings;
-            console.log(setting[0].material);
-            var order = new Order(request.body);
-            console.log(order.material);
-            for (var i = 0; i < setting.length; i++) {
-                console.log(order.material);
-                console.log(order.size.height);
-                console.log(setting[i]);
-                if ((order.material == setting[i].material) && (order.size.height == setting[i].size.height) && (order.size.width == setting[i].size.width)) {
-                    console.log("hello");
-                    order.save(function (err) {
-                        if (err) response.status(400).send(err);
-                        else {
-                            response.status(200).send("ok");
-                        }
-                    })
-                }
-            }
-        }
-    })
+
+    // Setting.find({}, function(err, settings) { 
+    //     if (err) response.status(400).send(err);
+    //     else {
+    //         setting = settings;
+    //         var order = new Order(request.body);
+    //         for (var i = 0; i < setting.length; i++) {
+    //             if ((order.material == setting[i].material) && (order.size.height == setting[i].size.height) && (order.size.width == setting[i].size.width)) {
+    //                 console.log("hello");
+    //                 order.save(function (err) {
+    //                     if (err) response.status(400).send(err);
+    //                     else {
+    //                         // response.status(200).send("ok");
+    //                         // return;
+    //                     }
+    //                 })
+    //                 response.status(200).send("ok");
+    //                 return;
+    //             }
+    //             else if (i == setting.length - 1) {
+    //                 response.status(400).send("size and or material not ok");
+    //                 return;
+    //             }
+    //         }
+    //     }
+    // })
 }
 exports.list = (request, response) => {
     
