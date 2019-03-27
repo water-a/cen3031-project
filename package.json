@@ -9,7 +9,7 @@
     "client": "cd client && npm start",
     "server": "node server/config/init",
     "build": "cd client && npm install",
-    "prod": "cd client && serve -s build -l 80"
+    "prod": "cd client && serve -s build"
   },
   "repository": {
     "type": "git",
