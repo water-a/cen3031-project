@@ -10,6 +10,9 @@ router.route('/:orderId')
     .get(controller.read)
     .post(controller.update);
 
+router.route('/download/:orderId')
+    .get(controller.download);
+
 router.route('/complete/:orderId')
     .get(controller.read)
     .post(controller.complete);

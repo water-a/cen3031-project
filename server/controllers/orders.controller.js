@@ -16,7 +16,11 @@ exports.create = async (request, response) => {
 
     let image = request.files.image;
     console.log(image);
-    let uploadStream = request.bucket.openUploadStream(image.name);
+    let uploadStream = request.bucket.openUploadStream(image.name, {
+        metadata: {
+            contentType: image.mimetype
+        }
+    });
     let imageStream = new Readable();
     imageStream.push(image.data);
     imageStream.push(null);
@@ -39,15 +43,35 @@ exports.create = async (request, response) => {
             });
         });
 }
+
+exports.download = (request, response) => {
+    Order.findById(request.params.orderId, async (err, order) => {
+        if (err) response.status(400).send(err);
+        else {
+            let files = await mongoose.connection.db.collection('images.files');
+            let metadata = await files.find({
+                _id: order.image
+            }).project({
+               metadata: 1 
+            }).toArray();
+            let downloadStream = request.bucket.openDownloadStream(order.image);
+            console.log(downloadStream);
+            response.set('content-type', metadata.contentType);
+            response.set('accept-ranges', 'bytes');
+            downloadStream.on('data', (chunk) => {
+                response.write(chunk);
+            });
+            downloadStream.on('error', () => {
+                response.sendStatus(400);
+            });
+            downloadStream.on('end', () => {
+                response.end();
+            });
+        }
+    })
+    //response.send("hi");
+}
 exports.list = (request, response) => {
-    request.bucket.openDownloadStreamByName('bird.jpeg').
-    pipe(fs.createWriteStream('./bird2.jpeg')).
-    on('error', function(error) {
-        assert.ifError(error);
-    }).
-    on('finish', function () {
-        console.log('done2');
-    });
     response.send("hello");
 }
 exports.paypal = (request, response) => {
