@@ -12,26 +12,22 @@ exports.create = async (request, response) => {
 
 
     let settings;
-    let order = new Order(request.body);
-    try {
-        settings = await Setting.findOne();
-    }
-    catch (error) {
-        console.log(error);
-    }
-    order.save(function (err) {
-        if (err) response.status(400).send(err);
-        else response.status(200).send("ok");
-    });
 
     let image = request.body.image;
+    let uploadStream = request.bucket.openUploadStream(image.name);
     fs.createReadStream(image.tempFilePath)
-        .pipe(request.bucket.openUploadStream(image.name))
+        .pipe(uploadStream)
         .on('error', function(error) {
             assert.ifError(error);
         })
         .on('finish', function() {
-            console.log('done');
+            request.body.image = mongoose.Types.ObjectId(uploadStream.id);
+            
+            let order = new Order(request.body);
+            order.save(function (err) {
+                if (err) response.status(400).send(err);
+                else response.status(200).send("ok");
+            });
         });
 }
 exports.list = (request, response) => {

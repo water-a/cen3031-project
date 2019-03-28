@@ -3,7 +3,7 @@ const express = require('express'),
       morgan = require('morgan'),
       config = require('./config'),
       bodyParser = require('body-parser'),
-      fileUpload = requiure('express-fileupload');
+      fileUpload = require('express-fileupload');
 
 mongoose.connect(config.db.uri, {useNewUrlParser: true});
 

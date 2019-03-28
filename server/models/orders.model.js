@@ -18,14 +18,8 @@ let orderSchema = new Schema({
         addrLine1: String,
         addrLine2: String
     },
-    completed:{
-        type: Boolean,
-        default: false
-    }, 
-    Refund: {
-        type: Boolean,
-        default: false
-    }
+    status: Number,
+    image: Schema.Types.ObjectId
 
 }, {timestamps: true});
 
