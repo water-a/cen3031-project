@@ -2,9 +2,10 @@ const mongoose = require('mongoose'),
       Order = require('../models/orders.model'),
       Setting = require('../models/settings.model'),
       path = require('path'),
+      { Readable } = require('stream'),
       fs = require('fs');
 
-exports.create = async (request, response) => {
+exports.create = async (request, response) => {     
     let responseBody = {
         status: 'success|fail|error',
         response: "message|object"
@@ -13,10 +14,13 @@ exports.create = async (request, response) => {
 
     let settings;
 
-    let image = request.body.image;
+    let image = request.files.image;
+    console.log(image);
     let uploadStream = request.bucket.openUploadStream(image.name);
-    fs.createReadStream(image.tempFilePath)
-        .pipe(uploadStream)
+    let imageStream = new Readable();
+    imageStream.push(image.data);
+    imageStream.push(null);
+    imageStream.pipe(uploadStream)
         .on('error', function(error) {
             assert.ifError(error);
         })

@@ -21,18 +21,18 @@ connection.on('error', console.error.bind(console, 'DATABASE [error]: '))
 
 var app = express();
 
+// File upload middleware
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
+
 // Parse post data
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
 app.use(bodyParser.json());
-
-// File upload middleware
-app.use(fileUpload({
-    useTempFiles : true,
-    tempFileDir : '/tmp/'
-}));
 
 // Logs requests
 app.use(morgan('dev'));
