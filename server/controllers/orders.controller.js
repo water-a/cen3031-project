@@ -1,32 +1,20 @@
 const mongoose = require('mongoose'),
       Order = require('../models/orders.model'),
       Setting = require('../models/settings.model');
+      
 
-exports.create = async (request, response) => {
-    let settings;
-    let order = new Order(request.body);
-    try {
-        settings = await Setting.findOne();
-    }
-    catch (error) {
-        console.log(error);
-    }
-    var index = settings.material.indexOf(order.material);
-    if (index >= 0) {
-        console.log(index);
-        if (settings.size[index].height == order.size.height && settings.size[index].width == order.size.width) {
-            order.save(function (err) {
-                if (err) response.status(400).send(err);
-                else response.status(200).send("ok");
-            });
+exports.create = (request, response) => {
+    //create new order in the db after validating all options, redirect to /checkout
+    var order = new Order(request.body);
+    order.save(function (err) {
+        if (err) {
+            console.log(err);
+            response.status(400).send(err);
         }
         else {
-            response.status(400).send('height or width do not match options');
+            //redirect?
         }
-    }
-    else {
-        response.status(400).send('material does not match options');
-    }
+    })
 }
 exports.list = (request, response) => {
     
@@ -52,50 +40,30 @@ exports.listorders = (request, response) => {
  }
  */
 
-exports.read = (request, response) => {
-    Order.findById(request.params.orderId, function(err, order) {
-        if (err) response.status(400).send(err);
-        else response.status(200).json(order);
-    })
-}
-
 exports.update = (request, response) => {
+  
+    //Also to use to update whether the order has been completed, update the boolean to "True" on complete
+    Order.findOneAndUpdate({Id: req.params._id}, function(err){
+        if(err) response.status(400).send(err);
+        else response.status(200).{Completed: True}
+    })
+
+    //If the customer refunds
+    Order.findOneAndUpdate({Id: req.params._id}, function(err){
+        
+        if(err) response.status(400).send(err);
+        else response.status(200).{Refund: True}
+    })
 
     //update order in case of alter in order after it has been processed
 
-    Order.findByIdAndUpdate(request.params.orderId, request.body, function(err){
+    Order.findOneAndUpdate({Id: req.params._id}, function(err){
         if(err) response.status(400).send(err);
-        else response.status(200).send("ok");
+        else response.status(200)
     })    
-}
-
-exports.complete = (request, response) => {
-    //Also to use to update whether the order has been completed, update the boolean to "True" on complete
-    Order.findByIdAndUpdate(request.params.orderId, {completed: true}, function(err){
-        if(err) response.status(400).send(err);
-        else response.status(200).send("ok");
-    })
-}
-
-exports.refund = (request, response) => {
-    //If the customer refunds
-    Order.findByIdAndUpdate(request.params.orderId, {Refund: true}, function(err){
-        if(err) response.status(400).send(err);
-        else response.status(200).send("ok");
-    })
-}
-
-exports.orderByID = (request, response, next, id) => {
-    Order.findById(id).exec(function(err, order) {
-        if (err) response.status(400).send(err);
-        else {
-            request.order = order;
-            next();
-        }
-    });
 }
 
 getEstimate = (material, size) =>{
     //Estimate the price based on the size and materials given from the customer
-    return 50
+    return 50;
 }
