@@ -1,0 +1,63 @@
+.Progress
+{
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 2.5em;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.Progress>li
+{
+    display: inline-block;
+    position: relative;
+}
+.Step {
+    z-index: 20;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 2.5em;
+    background: #00F4AC;
+    color: #fff;
+    line-height: 2.5em;
+    text-align: center;
+    transition: all 0.1s ease;
+}
+.Stepline
+{
+    z-index: 10;
+    width: 2.5em;
+    height: .4em;
+    margin: 0 -1px;
+    background: #00F4AC;
+    flex-grow: 1;
+    transition: all 0.5s ease;
+}
+.Stepline.Completed, .Step.Completed
+{
+    background: #00A171;
+}
+.Step.Active
+{
+    height: 3em;
+    width: 3em;
+    line-height: 3em;
+}
+.Step>span.Name
+{
+    font-weight: bold;
+    position: absolute;
+    color: #00A171; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -135%);
+    display: none;
+}
+.Step.Active>span.Name
+{
+    display: block;
+}
