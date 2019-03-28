@@ -11,42 +11,22 @@ exports.create = async (request, response) => {
     catch (error) {
         console.log(error);
     }
-    console.log(settings);
-    console.log(order.size);
-    console.log(settings.size[0]);//compare sizes together
-    if (settings.material.indexOf(order.material) >= 0) {
-        response.send('yeet');
+    var index = settings.material.indexOf(order.material);
+    if (index >= 0) {
+        console.log(index);
+        if (settings.size[index].height == order.size.height && settings.size[index].width == order.size.width) {
+            order.save(function (err) {
+                if (err) response.status(400).send(err);
+                else response.status(200).send("ok");
+            });
+        }
+        else {
+            response.status(400).send('height or width do not match options');
+        }
     }
     else {
-        response.send('lol');
+        response.status(400).send('material does not match options');
     }
-    //create new order in the db after validating all options, redirect to /checkout
-
-    // Setting.find({}, function(err, settings) { 
-    //     if (err) response.status(400).send(err);
-    //     else {
-    //         setting = settings;
-    //         var order = new Order(request.body);
-    //         for (var i = 0; i < setting.length; i++) {
-    //             if ((order.material == setting[i].material) && (order.size.height == setting[i].size.height) && (order.size.width == setting[i].size.width)) {
-    //                 console.log("hello");
-    //                 order.save(function (err) {
-    //                     if (err) response.status(400).send(err);
-    //                     else {
-    //                         // response.status(200).send("ok");
-    //                         // return;
-    //                     }
-    //                 })
-    //                 response.status(200).send("ok");
-    //                 return;
-    //             }
-    //             else if (i == setting.length - 1) {
-    //                 response.status(400).send("size and or material not ok");
-    //                 return;
-    //             }
-    //         }
-    //     }
-    // })
 }
 exports.list = (request, response) => {
     
