@@ -22,6 +22,7 @@
   "homepage": "https://github.com/water-a/cen3031-project#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "express-fileupload": "^1.1.3-alpha.2",
     "gridfs-stream": "^1.1.1",
     "mongoose": "^5.4.15",
     "morgan": "^1.9.1"

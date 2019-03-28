@@ -3,31 +3,19 @@ const express = require('express'),
       morgan = require('morgan'),
       config = require('./config'),
       bodyParser = require('body-parser'),
-      fs = require('fs'),
-      path = require('path'),
-      Grid = require('gridfs-stream');
+      fileUpload = requiure('express-fileupload');
 
 mongoose.connect(config.db.uri, {useNewUrlParser: true});
 
 const connection = mongoose.connection;
 
 let bucket;
-
 connection.once('open', () => {
     console.log('DATABASE: Connected to the database.');
     bucket = new mongoose.mongo.GridFSBucket(connection.db, {
         chunkSizeBytes: 1024,
         bucketName: 'images'
     });
-    // if (gridfs) {
-    //     var streamwrite = gridfs.createWriteStream({
-    //         filename: "test.txt"
-    //     });
-    //     fs.createReadStream(file).pipe(streamwrite);
-    //     streamwrite.on("close", function (file) {
-    //         console.log("written");
-    //     });
-    // } else console.log("no grid");
 });
 connection.on('error', console.error.bind(console, 'DATABASE [error]: '))
 
@@ -39,6 +27,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
 app.use(bodyParser.json());
+
+// File upload middleware
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
 
 // Logs requests
 app.use(morgan('dev'));

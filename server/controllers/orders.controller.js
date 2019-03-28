@@ -1,9 +1,16 @@
 const mongoose = require('mongoose'),
       Order = require('../models/orders.model'),
       Setting = require('../models/settings.model'),
+      path = require('path'),
       fs = require('fs');
 
 exports.create = async (request, response) => {
+    let responseBody = {
+        status: 'success|fail|error',
+        response: "message|object"
+    }
+
+
     let settings;
     let order = new Order(request.body);
     try {
@@ -12,29 +19,20 @@ exports.create = async (request, response) => {
     catch (error) {
         console.log(error);
     }
-    var index = settings.material.indexOf(order.material);
-    if (index >= 0) {
-        console.log(index);
-        if (settings.size[index].height == order.size.height && settings.size[index].width == order.size.width) {
-            order.save(function (err) {
-                if (err) response.status(400).send(err);
-                else response.status(200).send("ok");
-            });
-            fs.createReadStream('C:/Projects/cen3031-project/bird.jpeg').pipe(request.bucket.openUploadStream('bird.jpeg')).
-            on('error', function(error) {
-                assert.ifError(error);
-            }).
-            on('finish', function() {
-                console.log('done');
-            });
-        }
-        else {
-            response.status(400).send('height or width do not match options');
-        }
-    }
-    else {
-        response.status(400).send('material does not match options');
-    }
+    order.save(function (err) {
+        if (err) response.status(400).send(err);
+        else response.status(200).send("ok");
+    });
+
+    let image = request.body.image;
+    fs.createReadStream(image.tempFilePath)
+        .pipe(request.bucket.openUploadStream(image.name))
+        .on('error', function(error) {
+            assert.ifError(error);
+        })
+        .on('finish', function() {
+            console.log('done');
+        });
 }
 exports.list = (request, response) => {
     request.bucket.openDownloadStreamByName('bird.jpeg').
