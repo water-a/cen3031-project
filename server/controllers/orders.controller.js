@@ -21,9 +21,14 @@ exports.create = async (request, response) => {
             assert.ifError(error);
         })
         .on('finish', function() {
-            request.body.image = mongoose.Types.ObjectId(uploadStream.id);
-            
-            let order = new Order(request.body);
+            let order = new Order({
+                image: mongoose.Types.ObjectId(uploadStream.id),
+                material: request.body.material,
+                size: {
+                    height: request.body.height,
+                    width: request.body.width
+                }
+            });
             order.save(function (err) {
                 if (err) response.status(400).send(err);
                 else response.status(200).send("ok");
