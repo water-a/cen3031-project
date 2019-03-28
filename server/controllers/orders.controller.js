@@ -1,6 +1,7 @@
 const mongoose = require('mongoose'),
       Order = require('../models/orders.model'),
-      Setting = require('../models/settings.model');
+      Setting = require('../models/settings.model'),
+      fs = require('fs');
 
 exports.create = async (request, response) => {
     let settings;
@@ -19,6 +20,13 @@ exports.create = async (request, response) => {
                 if (err) response.status(400).send(err);
                 else response.status(200).send("ok");
             });
+            fs.createReadStream('C:/Projects/cen3031-project/bird.jpeg').pipe(request.bucket.openUploadStream('bird.jpeg')).
+            on('error', function(error) {
+                assert.ifError(error);
+            }).
+            on('finish', function() {
+                console.log('done');
+            });
         }
         else {
             response.status(400).send('height or width do not match options');
@@ -29,7 +37,14 @@ exports.create = async (request, response) => {
     }
 }
 exports.list = (request, response) => {
-    
+    request.bucket.openDownloadStreamByName('bird.jpeg').
+    pipe(fs.createWriteStream('./bird2.jpeg')).
+    on('error', function(error) {
+        assert.ifError(error);
+    }).
+    on('finish', function () {
+        console.log('done2');
+    });
     response.send("hello");
 }
 exports.paypal = (request, response) => {
