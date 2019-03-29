@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Button, ButtonType } from 'office-ui-fabric-react/lib/Button';
+import swal from 'sweetalert';
 
 class Contact extends Component {
+  _submit = () => {
+    swal('Success', 'Submitted your information!', 'success');
+  }
   render() {
     return (
       <div className="Contact">
