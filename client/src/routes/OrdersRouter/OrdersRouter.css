@@ -1,0 +1,78 @@
+h2
+{
+    margin-bottom: 0;
+}
+hr
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.ms-Button--primary
+{
+    background-color: #00A171 !important;
+}
+.ms-Button--primary:hover
+{
+    background-color: #00F4AC !important;   
+}
+.ms-TextField.is-active .ms-TextField-fieldGroup 
+{
+    border-color: #00A171 !important
+}
+.Application
+{ 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5vw;
+}
+.Application>.Logo
+{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+}
+.Application>.Logo>.Image
+{
+    height: 100px;
+    width: 100px;
+}
+.Application>.Logo>.Brand
+{
+    font-size: 2rem;
+    color: #00F4AC;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.Application>nav
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 35vw;
+    background-color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+.Application>nav>a
+{
+    color: #999;
+    padding: 10px;
+    text-decoration: none;
+}
+.Application>nav>a.active, .Application>nav>a:hover
+{
+    color: #00F4AC;
+    border-bottom: 3px solid #00F4AC;
+}
+.Application>.Container
+{
+    width: 35vw;
+    padding: 30px;
+    margin-top: 10px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    background-color: white;
+}

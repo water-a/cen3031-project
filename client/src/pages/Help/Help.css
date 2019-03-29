@@ -1,0 +1,12 @@
+.Help .button
+{
+    width: 100%;
+}
+
+.collapse {
+    display : none
+}
+
+.collapse.in {
+    display: block
+}
