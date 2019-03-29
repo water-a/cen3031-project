@@ -3,7 +3,8 @@ const express = require('express'),
       morgan = require('morgan'),
       config = require('./config'),
       bodyParser = require('body-parser'),
-      fileUpload = require('express-fileupload');
+      fileUpload = require('express-fileupload')
+      PayPal = require('paypal-rest-sdk');
 
 mongoose.connect(config.db.uri, {useNewUrlParser: true});
 
@@ -37,17 +38,24 @@ app.use(fileUpload({
 // Logs requests
 app.use(morgan('dev'));
 
-// Pass Settings, GridFS into request
+// Pass Settings, GridFS into request + Configure PayPal with credentials
 app.use(async (request, response, next) => {
     let Settings = require('../models/settings.model');
     request.settings = await Settings.findOne();
     request.bucket = bucket;
+
+    const {sandbox, client_id, client_secret} = request.settings.paypal;
+    PayPal.configure({
+        mode: sandbox ? 'sandbox' : 'live',
+        client_id: client_id,
+        client_secret: client_secret
+    });
+
     next();
 });
 
 // Example route
 app.use('/api', require('../routes/api.routes'));
-app.use('/ipn', require('../routes/ipn.routes'));
 
 // Open up and listen to port listed in config file
-app.listen(config.port, console.info.bind(console, 'SERVER: Launched backend on http://localhost:3001'));
+app.listen(config.port, console.info.bind(console, `SERVER: Launched backend on http://localhost:${config.port}`));
