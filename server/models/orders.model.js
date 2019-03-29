@@ -17,7 +17,13 @@ let orderSchema = new Schema({
     shippingAddress: {
         addrLine1: String,
         addrLine2: String
-    }
+    },
+    status: {
+        type: Number,
+        default: 0
+    },
+    image: Schema.Types.ObjectId,
+    paypalToken: String
 }, {timestamps: true});
 
 let Order = mongoose.model('Order', orderSchema);
