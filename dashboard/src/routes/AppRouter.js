@@ -5,7 +5,7 @@ import DashboardRouter from './DashboardRouter/index.js';
 const AppRouter = () => (
     <Router>
         <Switch>
-            <Route path='/' component={DashboardRouter}/>
+            <Route path='/dashboard/' component={DashboardRouter}/>
         </Switch>
     </Router>
 );

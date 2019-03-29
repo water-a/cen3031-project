@@ -9,15 +9,15 @@ const DashboardRouter = (props) => (
     <div className="wrapper">
         <div className="sidebar">
             <div className="logo">
-                <Link to="/" className="simple-text logo-normal">
+                <Link to="/dashboard" className="simple-text logo-normal">
                     <img alt="Petree's Prints" height="35" width="35" src={logo} />
                     Petree's Prints
                 </Link>
             </div>
             <div className="sidebar-wrapper">
                 <ul className="nav">
-                    <li><Link to="/"><i className="now-ui-icons design_bullet-list-67"></i>Orders</Link></li>
-                    <li><Link to="/settings"><i className="now-ui-icons loader_gear"></i>Settings</Link></li>
+                    <li><Link to="/dashboard"><i className="now-ui-icons design_bullet-list-67"></i>Orders</Link></li>
+                    <li><Link to="/dashboard/settings"><i className="now-ui-icons loader_gear"></i>Settings</Link></li>
                 </ul>
             </div>
         </div>

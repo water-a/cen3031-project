@@ -41,6 +41,7 @@ app.use(morgan('dev'));
 
 // Pass build
 app.use(express.static(path.join(__dirname, '../../client/build')));
+app.use(express.static(path.join(__dirname, '../../dashboard/build')));
 
 // Pass Settings, GridFS into request + Configure PayPal with credentials
 app.use(async (request, response, next) => {
@@ -60,6 +61,10 @@ app.use(async (request, response, next) => {
 
 // Example route
 app.use('/api', require('../routes/api.routes'));
+
+app.get('/dashboard*', (request, response) => {
+    response.sendFile(path.join(__dirname, '../../dashboard/build/index.html'));
+});
 
 app.get('*', (request, response) => {
     response.sendFile(path.join(__dirname, '../../client/build/index.html'));
