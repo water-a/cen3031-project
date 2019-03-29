@@ -1,9 +1,9 @@
 const express = require('express'),
       router = express.Router(),
       orders = require('./orders.routes'),
-      settings = require('./settings.routes');
+      options = require('./options.routes');
 
 router.use('/orders', orders);
-router.use('/', settings);
+router.use('/options', options);
 
 module.exports = router;

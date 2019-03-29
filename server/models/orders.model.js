@@ -18,15 +18,12 @@ let orderSchema = new Schema({
         addrLine1: String,
         addrLine2: String
     },
-    completed:{
-        type: Boolean,
-        default: false
-    }, 
-    Refund: {
-        type: Boolean,
-        default: false
-    }
-
+    status: {
+        type: Number,
+        default: 0
+    },
+    image: Schema.Types.ObjectId,
+    paypalToken: String
 }, {timestamps: true});
 
 let Order = mongoose.model('Order', orderSchema);
