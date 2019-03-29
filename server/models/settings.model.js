@@ -2,8 +2,8 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema;
 
 let settingSchema = new Schema({
-    material: [String],
-    size: [{
+    materials: [String],
+    sizes: [{
         name: String,
         height: Number,
         width: Number
@@ -18,11 +18,6 @@ let settingSchema = new Schema({
         client_id: String,
         client_secret: String
     }
-}, { 
-    capped: {
-        size: 1024, 
-        max: 1
-    } 
 });
 
 let Setting = mongoose.model('Setting', settingSchema);

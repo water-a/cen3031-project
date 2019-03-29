@@ -6,7 +6,7 @@ class SelectionBox extends Component {
     constructor(props){
         super(props);
         this.state = {
-            index: null,
+            index: this.props.index,
             items: this.props.items
         };
         this._renderItem = this.props.render;

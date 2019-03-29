@@ -201,3 +201,10 @@ exports.capture = (request, response) => {
         }
     });
 }
+
+exports.estimate = (request, response) => {
+    response.status(200).json({
+        status: 'success',
+        response: (Math.random() * 49 + 50).toFixed(2)
+    });
+}

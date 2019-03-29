@@ -1,89 +1,95 @@
 import React, { Component } from 'react';
-
 import './OrderForm.css';
-import { SelectionBox } from '../../components/SelectionBox';
 import { UploadBox } from '../../components/UploadBox';
+import { MaterialSelection } from './MaterialSelection';
+import { SizeSelection } from './SizeSelection';
 import { Carousel } from '../../components/Carousel';
-import { OrderFormContext } from '../../components/OrderFormContext';
+import { Estimate } from './Estimate';
+import { PaypalButton } from './PaypalButton';
+import { Provider, withGlobalState } from 'react-globally';
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
-// Going to fetch this from the website
-const Materials = ['Gloss', 'Matte', 'Custom'];
-const Sizes = [
-  {
-    name: 'Large',
-    size: {
-      height: 100,
-      width: 100
-    } 
+// Initial state
+const initialState = {
+  image: null,
+  material: {
+    index: null,
+    item: null,
+    custom: null
   },
-  {
-    name: 'Medium',
-    size: {
-      height: 50,
-      width: 50
-    } 
+  size: {
+    index: null,
+    item: null,
+    custom: null
   },
-  {
-    name: 'Small',
-    size: {
-      height: 10,
-      width: 10
-    } 
-  },
-  {
-    name: 'Custom'
+}
+
+class CarouselWrapperObject extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      materials: null,
+      sizes: null
+    }
+    fetch('/api/options')
+    .then(response => response.json())
+    .then(json => {
+      this.setState({
+        materials: json.response.materials,
+        sizes: json.response.sizes
+      });
+    });
   }
-];
+  render(){
+    if (this.state.materials === null || this.state.sizes == null){
+      return (
+        <Spinner 
+          size={SpinnerSize.large} 
+          label="Loading..." ariaLive="assertive"
+        />
+      );
+    }
+    return (
+      <Carousel 
+        slides={[
+          {
+            slide: <UploadBox />,
+            name: 'Upload',
+            icon: 'file-upload',
+            preNext: () => this.props.globalState.image !== null
+          },
+          {
+            slide: <MaterialSelection materials={this.state.materials} />,
+            name: 'Material',
+            icon: 'sticky-note',
+            preNext: () => this.props.globalState.material.index !== null
+          },
+          {
+            slide: <SizeSelection sizes={this.state.sizes} />,
+            name: 'Size',
+            icon: 'ruler-combined',
+            preNext: () => this.props.globalState.size.index !== null
+          },
+          {
+            slide: <Estimate />,
+            name: 'Estimate',
+            icon: 'dollar-sign',
+            actions: <PaypalButton />
+          }
+        ]}
+      />
+    );
+  }
+}
+
+let CarouselWrapper = withGlobalState(CarouselWrapperObject);
 
 class OrderForm extends Component {
-  _renderMaterialSelection = (item, index) => <b>{item}</b>
-  _renderSizeSelection = (item, index) => (
-    <>
-      <b>{item.name}</b>
-      {item.size && <><br />{item.size.height + 'x' + item.size.width}</>}
-    </>
-  )
-
   render() {
     return (
-      <OrderFormContext.Provider className="Order">
-        <Carousel 
-          slides={[
-            {
-              slide: <UploadBox />,
-              name: 'Upload',
-              icon: 'file-upload',
-            },
-            {
-              slide: <SelectionBox
-                key="Material" 
-                items={Materials} 
-                render={this._renderMaterialSelection} 
-              />,
-              name: 'Material',
-              icon: 'sticky-note',
-            },
-            {
-              slide: 
-                <SelectionBox 
-                  key="Size"
-                  items={Sizes} 
-                  render={this._renderSizeSelection} 
-                />,
-              name: 'Size',
-              icon: 'ruler-combined',
-            },
-            {
-              slide: <div>
-                      <h1 style={{textAlign: "center"}}>Your estimate is</h1>
-                      <span style={{fontSize: "5rem", color: "#00F4AC", textAlign: "center", display: "block"}}>$100</span>
-                    </div>,
-              name: 'Estimate',
-              icon: 'dollar-sign',
-            }
-          ]}
-        />
-      </OrderFormContext.Provider>
+      <Provider globalState={initialState}>
+        <CarouselWrapper />
+      </Provider>
     );
   }
 }

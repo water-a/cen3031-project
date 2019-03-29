@@ -16,4 +16,7 @@ router.route('/:orderId/download')
 router.route('/capture')
     .post(controller.capture);
 
+router.route('/estimate')
+    .post(controller.estimate);
+
 module.exports = router;

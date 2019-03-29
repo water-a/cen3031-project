@@ -35,8 +35,14 @@ class Carousel extends Component {
                     <FontAwesomeIcon icon={slide.icon} />
                 </>)
             }
+            let canVisit = this._canVisit(index);
             return (
-                <li key={step} className={classnames}>
+                <li 
+                    style={{cursor: canVisit ? 'pointer' : 'index'}} 
+                    onClick={canVisit ? this._set.bind(this, index) : undefined} 
+                    key={step} 
+                    className={classnames}
+                >
                     {content}
                 </li>
             );
@@ -48,28 +54,46 @@ class Carousel extends Component {
         }
         return steps;
     }
-    _back = () => {
+    _canVisit = (index) => {
+        if (index == 0){
+            return true;
+        }
+        let current = this.props.slides[index - 1];
+        return React.isValidElement(current) || (current.preNext && current.preNext());
+    }
+    _set = (index) => {
         this.setState({
-            index: Math.max(this.state.index - 1, 0)
+            index: Math.min(Math.max(index, 0), this.props.slides.length - 1)
         });
+    }
+    _back = () => {
+        this._set(this.state.index - 1);
     }
     _next = () => {
-        this.setState({
-            index: Math.min(this.state.index + 1, this.props.slides.length - 1)
-        });
+        this._set(this.state.index + 1);
     }
     render() {
-        let currentSlide = this.state.slides[this.state.index];
+        let current = this.state.slides[this.state.index];
+        let slide = current;
+        let enabled = true;
+        let actions;
+        if (!React.isValidElement(current)){
+            slide = current.slide;
+            actions = current.actions;
+            if (current.preNext){
+                enabled = current.preNext();
+            }
+        }
         return (
             <div className="Carousel">
                 <ul className="Progress">
                     {this._renderProgressSteps()}
                 </ul>
-                {React.isValidElement(currentSlide) ? currentSlide : currentSlide.slide}
+                {slide}
                 <br />
                 {this.state.index > 0 && <CompoundButton onClick={this._back} secondaryText="Return to the previous screen">Back</CompoundButton>}
-                {this.state.index < this.props.slides.length - 1 && <CompoundButton style={{float: "right"}} onClick={this._next} secondaryText="Continue to the next screen">Next</CompoundButton>}
-                {this.state.index == this.props.slides.length - 1 && <CompoundButton style={{float: "right"}} primary={true} secondaryText="Buy your print via PayPal">Purchase</CompoundButton>}
+                {this.state.index < this.props.slides.length - 1 && <CompoundButton style={{float: "right"}} disabled={!enabled} onClick={this._next} secondaryText="Continue to the next screen">Next</CompoundButton>}
+                {actions}
             </div>
         );
     }

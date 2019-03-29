@@ -1,6 +1,7 @@
 import OrderForm from './OrderForm';
-import Help from './Help';
+import FAQ from './FAQ';
+import Contact from './Contact';
 import Dashboard from './Dashboard';
 import About from './About';
 
-export { OrderForm, Help, Dashboard, About }
+export { OrderForm, FAQ, Contact, Dashboard, About }
