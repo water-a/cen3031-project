@@ -164,6 +164,7 @@ exports.read = (request, response) => {
             response.status(200).json(order);
         }
     })
+}
 
 exports.update = (request, response) => {
     Order.findByIdAndUpdate(request.params.orderId, request.body, function(error){
