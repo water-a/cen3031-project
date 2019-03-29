@@ -4,12 +4,26 @@ const mongoose = require('mongoose'),
 let settingSchema = new Schema({
     material: [String],
     size: [{
+        name: String,
         height: Number,
         width: Number
     }],
+    maxSize: {
+        height: Number,
+        width: Number
+    },
     active: Boolean,
-    paypal: String
-}, {timestamps: true});
+    paypal: {
+        sandbox: Boolean,
+        client_id: String,
+        client_secret: String
+    }
+}, { 
+    capped: {
+        size: 1024, 
+        max: 1
+    } 
+});
 
 let Setting = mongoose.model('Setting', settingSchema);
 
