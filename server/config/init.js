@@ -40,7 +40,7 @@ app.use(fileUpload({
 app.use(morgan('dev'));
 
 // Pass build
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '../../client/build')));
 
 // Pass Settings, GridFS into request + Configure PayPal with credentials
 app.use(async (request, response, next) => {
@@ -62,7 +62,7 @@ app.use(async (request, response, next) => {
 app.use('/api', require('../routes/api.routes'));
 
 app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname + '/client/build/index.html'));
+    response.sendFile(path.join(__dirname + '../../client/build/index.html'));
 });
 
 // Open up and listen to port listed in config file
