@@ -17,6 +17,7 @@ class Contact extends Component {
         
         <br />
         <Button
+          onClick={this._submit}
           className="button"
           buttonType={ ButtonType.primary} 
           allowDisabledFocus={true}
