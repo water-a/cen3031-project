@@ -3,7 +3,8 @@ const express = require('express'),
       morgan = require('morgan'),
       config = require('./config'),
       bodyParser = require('body-parser'),
-      fileUpload = require('express-fileupload')
+      fileUpload = require('express-fileupload'),
+      path = require('path'),
       PayPal = require('paypal-rest-sdk');
 
 mongoose.connect(config.db.uri, {useNewUrlParser: true});
@@ -38,6 +39,9 @@ app.use(fileUpload({
 // Logs requests
 app.use(morgan('dev'));
 
+// Pass build
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // Pass Settings, GridFS into request + Configure PayPal with credentials
 app.use(async (request, response, next) => {
     let Settings = require('../models/settings.model');
@@ -56,6 +60,10 @@ app.use(async (request, response, next) => {
 
 // Example route
 app.use('/api', require('../routes/api.routes'));
+
+app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 // Open up and listen to port listed in config file
 app.listen(config.port, console.info.bind(console, `SERVER: Launched backend on http://localhost:${config.port}`));
