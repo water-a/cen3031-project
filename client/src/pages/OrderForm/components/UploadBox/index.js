@@ -1,3 +1,3 @@
 import UploadBox from './UploadBox';
 
-export { UploadBox };
+export default UploadBox;

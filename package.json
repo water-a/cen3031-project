@@ -6,7 +6,9 @@
   "scripts": {
     "start": "npm run server",
     "test": "npm-run-all --parallel client server",
+    "dash": "npm-run-all --parallel dashboard server",
     "client": "cd client && npm start",
+    "dashboard": "cd dashboard && npm start",
     "server": "node server/config/init"
   },
   "repository": {

@@ -12,11 +12,12 @@ class SelectionBox extends Component {
         this._renderItem = this.props.render;
         this._onSelect = this.props.onSelect;
     }
-    _select = (item, index) => {
-        this.setState({
-            index: index
-        });
-        this._onSelect && this._onSelect(item, index);
+    _select = async (item, index) => {
+        if (this._onSelect ? await this._onSelect(item, index) : true){
+            this.setState({
+                index: index
+            });
+        }
     }
     render(){
         return (

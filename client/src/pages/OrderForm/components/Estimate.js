@@ -3,9 +3,7 @@ import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import { withGlobalState } from 'react-globally';
 import swal from 'sweetalert';
 
-
-
-class EstimateObject extends Component {
+class Estimate extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -24,7 +22,7 @@ class EstimateObject extends Component {
         })
         .then(response => response.json())
         .then(json => {
-            if (json.status == 'success'){
+            if (json.status === 'success'){
                 this.setState({
                     estimate: json.response
                 });
@@ -43,6 +41,4 @@ class EstimateObject extends Component {
     }
 }
 
-let Estimate = withGlobalState(EstimateObject);
-
-export { Estimate };
+export default withGlobalState(Estimate);

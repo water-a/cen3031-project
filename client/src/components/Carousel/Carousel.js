@@ -55,7 +55,7 @@ class Carousel extends Component {
         return steps;
     }
     _canVisit = (index) => {
-        if (index == 0){
+        if (index === 0){
             return true;
         }
         let current = this.props.slides[index - 1];

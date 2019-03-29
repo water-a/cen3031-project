@@ -4,7 +4,7 @@ import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import swal from 'sweetalert';
 import { withGlobalState } from 'react-globally';
 
-class PaypalButtonObject extends Component {
+class PaypalButton extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -27,7 +27,7 @@ class PaypalButtonObject extends Component {
             })
             .then(response => response.json())
             .then(json => {
-                if (json.status == 'success'){
+                if (json.status === 'success'){
                     window.location.href = json.response.redirectUrl;
                 } else {
                     swal('Oops...something happened', json.message, 'error');
@@ -49,6 +49,4 @@ class PaypalButtonObject extends Component {
     }
 }
 
-let PaypalButton = withGlobalState(PaypalButtonObject);
-
-export { PaypalButton }
+export default withGlobalState(PaypalButton);

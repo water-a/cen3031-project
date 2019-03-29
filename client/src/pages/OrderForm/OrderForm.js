@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import './OrderForm.css';
-import { UploadBox } from '../../components/UploadBox';
-import { MaterialSelection } from './MaterialSelection';
-import { SizeSelection } from './SizeSelection';
-import { Carousel } from '../../components/Carousel';
-import { Estimate } from './Estimate';
-import { PaypalButton } from './PaypalButton';
+import { UploadBox, MaterialSelection, SizeSelection, Carousel, Estimate, PaypalButton } from './components';
 import { Provider, withGlobalState } from 'react-globally';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 

@@ -5,7 +5,7 @@ class About extends Component {
   render() {
     return (
       <div className="About">
-        <img src={profile} height="150px" width="150px" />
+        <img alt="Danielle Petree" src={profile} height="150px" width="150px" />
         <section>
           <h2>Hi, I am Danielle Petree, nice to meet you!</h2>
           <p>
@@ -13,7 +13,7 @@ class About extends Component {
             around and bring the best of the worlds into my camera. In 2018, I got my creative photography
             degree at University of Florida. I am passionate about recording beautiful moments and make
             them eternal. Unfortunately, I had seizures that impacted my life quite bit, but this will not
-            hinder my path on photography. My intension is to capture as many beautiful moments as possible
+            hinder my path on photography. My intention is to capture as many beautiful moments as possible
             and let them stay for years and years. So it gave me an idea of founding this printing website.
           </p>
         </section>

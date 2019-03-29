@@ -37,7 +37,7 @@ class UploadBox extends Component {
         if (this.props.globalState.preview){
             content = (
                 <div className="Preview">
-                    <img src={this.props.globalState.preview} />
+                    <img alt={this.props.globalState.image.name} src={this.props.globalState.preview} />
                     <span>{this.props.globalState.image.name}</span>
                 </div>
             );

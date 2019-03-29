@@ -3,13 +3,13 @@ import { Route, Link, NavLink } from 'react-router-dom';
 
 import './OrdersRouter.css';
 import logo from '../../img/logo.png';
-import { OrderForm, FAQ, Contact, Dashboard, About } from '../../pages';
+import { OrderForm, FAQ, Contact, About } from '../../pages';
 
 
 const OrdersRouter = (props) => (
     <div className="Application">
         <Link className="Logo" to= "/" >
-            <img className="Image" src={logo} />
+            <img alt="Petree's Prints" className="Image" src={logo} />
             <span className="Brand">Petree's Prints</span>
         </Link>
         <nav>

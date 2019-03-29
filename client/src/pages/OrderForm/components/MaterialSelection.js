@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { SelectionBox } from '../../components/SelectionBox';
+import SelectionBox from '../../../components/SelectionBox';
 import { withGlobalState } from 'react-globally';
 import swal from 'sweetalert';
 
-class MaterialSelectionBox extends Component {
+class MaterialSelection extends Component {
     constructor(props){
         super(props);
         let materials = this.props.materials.slice(0);
@@ -13,7 +13,7 @@ class MaterialSelectionBox extends Component {
         }; 
     }
     _renderMaterialSelection = (item, index) => {
-        if (index == this.state.materials.length - 1){
+        if (index === this.state.materials.length - 1){
             return (
                 <>
                     <b>{item}</b>
@@ -25,29 +25,37 @@ class MaterialSelectionBox extends Component {
             <b>{item}</b>
         );
     }
-    _onSelectMaterial = (item, index) => {
-        if (index == this.state.materials.length - 1){
-            swal({
-                text: 'What material would you like to use?',
-                content: "input"
-            }).then(material => {
+    _onSelectMaterial = async (item, index) => {
+        return new Promise((resolve, reject) => {
+            if (index === this.state.materials.length - 1){
+                swal({
+                    text: 'What material would you like to use?',
+                    content: "input"
+                }).then(material => {
+                    if (material){
+                        this.props.setGlobalState(() => ({
+                            material: {
+                                index: index,
+                                item: material,
+                                custom: material
+                            }
+                        }));
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                })
+            } else {
                 this.props.setGlobalState(() => ({
                     material: {
                         index: index,
-                        item: material,
-                        custom: material
+                        item: item,
+                        custom: null
                     }
                 }));
-            });
-        } else {
-            this.props.setGlobalState(() => ({
-                material: {
-                    index: index,
-                    item: item,
-                    custom: null
-                }
-            }));
-        }
+                resolve(true);
+            }
+        });
     }
     render() {
         return (
@@ -62,6 +70,4 @@ class MaterialSelectionBox extends Component {
     }
 }
 
-let MaterialSelection = withGlobalState(MaterialSelectionBox);
-
-export { MaterialSelection };
+export default withGlobalState(MaterialSelection);

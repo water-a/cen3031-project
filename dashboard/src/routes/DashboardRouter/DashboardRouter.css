@@ -1,0 +1,15 @@
+.sidebar::after {
+    background: #00A171 !important;
+}
+.sidebar>.logo>.logo-normal {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.sidebar>.logo>.logo-normal>img {
+    margin-right: 10px;
+}
+table>thead>th {
+    color: #00F4AC !important;
+}
