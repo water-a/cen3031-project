@@ -1,0 +1,15 @@
+.About img
+{
+    border-radius: 50%;
+}
+.About>img
+{
+    display: block;
+    margin: 0 auto;
+}
+.About>section 
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

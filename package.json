@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"nodemon server/config/init.js\" \"cd client; npm start\""
+    "start": "npm run server",
+    "test": "npm-run-all --parallel client server",
+    "dash": "npm-run-all --parallel dashboard server",
+    "client": "cd client && npm start",
+    "dashboard": "cd dashboard && npm start",
+    "server": "node server/config/init"
   },
   "repository": {
     "type": "git",
@@ -18,10 +22,17 @@
   },
   "homepage": "https://github.com/water-a/cen3031-project#readme",
   "dependencies": {
-    "concurrently": "^4.1.0",
     "express": "^4.16.4",
+    "express-fileupload": "^1.1.3-alpha.2",
     "mongoose": "^5.4.15",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.10"
+    "paypal-rest-sdk": "^1.8.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.10",
+    "npm-run-all": "^4.1.5",
+    "serve": "^10.1.2"
   }
 }

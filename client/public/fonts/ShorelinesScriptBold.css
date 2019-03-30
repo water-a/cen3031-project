@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'ShorelinesScriptBold';
+    src: url('ShorelinesScriptBold.eot');
+    src: url('ShorelinesScriptBold.eot?#iefix') format('embedded-opentype'),
+         url('ShorelinesScriptBold.svg#ShorelinesScriptBold') format('svg'),
+         url('ShorelinesScriptBold.ttf') format('truetype'),
+         url('ShorelinesScriptBold.woff') format('woff'),
+         url('ShorelinesScriptBold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
