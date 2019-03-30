@@ -35,7 +35,7 @@ class Estimate extends Component {
         return (
             <div>
                 <h1 style={{textAlign: "center"}}>Your estimate is</h1>
-                <span style={{fontSize: "5rem", color: "#00F4AC", textAlign: "center", display: "block"}}>${this.state.estimate ? this.state.estimate : <Spinner size={SpinnerSize.large} />}</span>
+                <span style={{fontSize: "5rem", color: "#FBC7C4", textAlign: "center", display: "block"}}>${this.state.estimate ? this.state.estimate : <Spinner size={SpinnerSize.large} />}</span>
             </div>
         );
     }

@@ -1,5 +1,5 @@
 .sidebar::after {
-    background: #00A171 !important;
+    background: #CA278C !important;
 }
 .sidebar>.logo>.logo-normal {
     display: flex !important;
@@ -11,5 +11,5 @@
     margin-right: 10px;
 }
 table>thead>th {
-    color: #00F4AC !important;
+    color: #CA278C !important;
 }

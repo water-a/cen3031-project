@@ -21,7 +21,7 @@
     width: 2.5em;
     height: 2.5em;
     border-radius: 2.5em;
-    background: #00F4AC;
+    background: #FBC7C4;
     color: #fff;
     line-height: 2.5em;
     text-align: center;
@@ -33,13 +33,13 @@
     width: 2.5em;
     height: .4em;
     margin: 0 -1px;
-    background: #00F4AC;
+    background: #FBC7C4;
     flex-grow: 1;
     transition: all 0.5s ease;
 }
 .Stepline.Completed, .Step.Completed
 {
-    background: #00A171;
+    background: #E47297;
 }
 .Step.Active
 {
@@ -51,7 +51,7 @@
 {
     font-weight: bold;
     position: absolute;
-    color: #00A171; 
+    color: #E47297; 
     left: 50%;
     top: 50%;
     transform: translate(-50%, -135%);

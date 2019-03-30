@@ -13,21 +13,21 @@ hr
 }
 .ms-Button--primary
 {
-    background-color: #00A171 !important;
+    background-color: #9C1C6B !important;
 }
 .ms-Button--primary:hover
 {
-    background-color: #00F4AC !important;   
+    background-color: #CA278C !important;   
 }
 .ms-TextField.is-active .ms-TextField-fieldGroup 
 {
-    border-color: #00A171 !important
+    border-color: #9C1C6B !important
 }
 .ms-Spinner-circle {
-    border-color: #00A171 #00F4AC #00F4AC !important;
+    border-color: #9C1C6B #CA278C #CA278C !important;
 }
 .ms-Spinner-label {
-    color: #00A171 !important
+    color: #9C1C6B !important
 }
 .Application
 { 
@@ -41,7 +41,7 @@ hr
     display: flex;
     align-items: center;
     flex-direction: row;
-    text-decoration: none;
+    text-decoration: none;  
 }
 .Application>.Logo>.Image
 {
@@ -51,9 +51,10 @@ hr
 .Application>.Logo>.Brand
 {
     font-size: 2rem;
-    color: #00F4AC;
+    color: #E47297;
     text-decoration: none;
     margin-left: 20px;
+    font-family: 'ShorelinesScriptBold', sans-serif;
 }
 .Application>nav
 {
@@ -75,8 +76,8 @@ hr
 }
 .Application>nav>a.active, .Application>nav>a:hover
 {
-    color: #00F4AC;
-    border-bottom: 3px solid #00F4AC;
+    color: #E47297;
+    border-bottom: 3px solid #E47297;
 }
 .Application>.Container
 {
@@ -101,6 +102,6 @@ hr
 @media screen and (max-width: 620px){
     .Application>.Container, .Application>nav
     {
-        width: 100%;
+        width: 80%;
     }
 }
