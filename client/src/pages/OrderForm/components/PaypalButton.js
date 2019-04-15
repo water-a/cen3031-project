@@ -20,7 +20,7 @@ class PaypalButton extends Component {
             orderData.append('material', this.props.globalState.material.item);
             orderData.append('height', this.props.globalState.size.item.height);
             orderData.append('width', this.props.globalState.size.item.width);
-            orderData.append('image', this.props.globalState.image)
+            orderData.append('image', this.props.globalState.image);
             fetch('/api/orders', {
                 method: 'POST',
                 body: orderData
