@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import profile from '../../img/profile.jpg';
+import profile from '../../img/profile.png';
 import './About.css';
 class About extends Component {
   render() {
     return (
       <div className="About">
-        <img alt="Danielle Petree" src={profile} height="150px" width="150px" />
+        <img alt="Tree" src={profile} height="200px" width="200px" />
         <section>
           <h2>Hi, I am Danielle Petree, nice to meet you!</h2>
           <p>
