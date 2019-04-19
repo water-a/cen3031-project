@@ -7,9 +7,3 @@
     display: block;
     margin: 0 auto;
 }
-.About>section 
-{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}

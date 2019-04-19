@@ -15,18 +15,14 @@ class SizeSelection extends Component {
         }; 
     }
     _renderSizeSelection = (item, index) => {
-        if (index === this.state.sizes.length - 1){
-            return (
-                <>
-                    <b>{item.name}</b>
-                    {this.props.globalState.size.custom  && <>{this.props.globalState.size.custom.height + 'x' + this.props.globalState.size.custom.width}</>}
-                </>
-            );
+        if (index === this.state.sizes.length - 1 && this.props.globalState.size.custom){
+            item.height = this.props.globalState.size.custom.height;
+            item.width = this.props.globalState.size.custom.width;
         }
         return (
             <>
-                <b>{item.name}</b>
-                {(item.height && item.width) && item.height + 'x' + item.width}
+                <b>{item.height && item.width ? item.height + '\'x' + item.width + '\'' : item.name}</b>
+                {item.height && item.width && '$' + (item.height * item.width * this.props.globalState.material.item.costPerArea).toLocaleString()}
             </>
         );
     }

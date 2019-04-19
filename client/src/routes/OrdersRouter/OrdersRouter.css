@@ -105,3 +105,23 @@ hr
         width: 80%;
     }
 }
+.Estimate>.Title {
+    text-align: center;
+}
+.Estimate>.Container {
+    display: flex;
+}
+.Estimate>.Container>img {
+    max-height: 200px;
+}
+.Estimate>.Container>.Information {
+    margin-left: 10px;
+}
+.Estimate>.Container>.Information>.Name {
+    display: block;
+    font-size: 1.5rem;
+}
+.Estimate>.Container>.Information>span {
+    display: block;
+    font-size: 1rem;
+}

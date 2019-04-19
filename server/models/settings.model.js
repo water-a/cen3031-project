@@ -2,15 +2,21 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema;
 
 let settingSchema = new Schema({
-    materials: [String],
-    sizes: [{
+    materials: [{
         name: String,
+        costPerArea: Number
+    }],
+    sizes: [{
         height: Number,
         width: Number
     }],
     maxSize: {
         height: Number,
         width: Number
+    },
+    content: {
+        faq: String,
+        about: String
     },
     active: Boolean,
     paypal: {

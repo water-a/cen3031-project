@@ -3,20 +3,26 @@ const mongoose = require('mongoose'),
 
 let orderSchema = new Schema({
     contact: {
-        phone: String,
         firstName: String,
         lastName: String,
         email: String,
     },
-    cost: mongoose.Types.Decimal128,
-    material: String,
+    cost: Number,
+    material: {
+        name: String,
+        costPerArea: Number
+    },
     size: {
         height: Number,
         width: Number
     },
     shippingAddress: {
-        addrLine1: String,
-        addrLine2: String
+        line1: String,
+        line2: String,
+        city: String,
+        state: String,
+        postal: String,
+        country: String
     },
     status: {
         type: Number,

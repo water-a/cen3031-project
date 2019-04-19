@@ -17,7 +17,7 @@ class PaypalButton extends Component {
                 process: true
             });
             let orderData = new FormData();
-            orderData.append('material', this.props.globalState.material.item);
+            orderData.append('material', this.props.globalState.material.item.name);
             orderData.append('height', this.props.globalState.size.item.height);
             orderData.append('width', this.props.globalState.size.item.width);
             orderData.append('image', this.props.globalState.image);
@@ -31,7 +31,15 @@ class PaypalButton extends Component {
                     window.location.href = json.response.redirectUrl;
                 } else {
                     swal('Oops...something happened', json.message, 'error');
+                    this.setState({
+                        process: false
+                    });
                 }
+            }).catch(() => {
+                swal('Oops...something happened', 'Could not reach server', 'error');
+                this.setState({
+                    process: false
+                });
             });
         }
     }

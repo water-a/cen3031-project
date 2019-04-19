@@ -5,9 +5,14 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       fileUpload = require('express-fileupload'),
       path = require('path'),
-      PayPal = require('paypal-rest-sdk');
+      PayPal = require('paypal-rest-sdk'),
+      auth = require('../controllers/auth.controller'),
+      sanitize = require('mongo-sanitize');
 
-mongoose.connect(config.db.uri, {useNewUrlParser: true});
+mongoose.connect(config.db.uri, {
+    useNewUrlParser: true,
+    useFindAndModify: false
+});
 
 const connection = mongoose.connection;
 
@@ -30,6 +35,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// Sanitize input to prevent NoSQL injection
+app.use((request, response, next) => {
+    request.body = sanitize(request.body);
+    next();
+});
+
 // File upload middleware
 app.use(fileUpload({
     useTempFiles : true,
@@ -46,7 +57,12 @@ app.use(express.static(path.join(__dirname, '../../dashboard/build')));
 // Pass Settings, GridFS into request + Configure PayPal with credentials
 app.use(async (request, response, next) => {
     let Settings = require('../models/settings.model');
+    let defaultSettings = require('./default.setting.json');
     request.settings = await Settings.findOne();
+    if (request.settings === null){
+        new Settings(defaultSettings).save();
+        request.settings = defaultSettings;
+    }
     request.bucket = bucket;
 
     const {sandbox, client_id, client_secret} = request.settings.paypal;
@@ -59,10 +75,9 @@ app.use(async (request, response, next) => {
     next();
 });
 
-// Example route
 app.use('/api', require('../routes/api.routes'));
 
-app.get('/dashboard*', (request, response) => {
+app.get('/dashboard*', auth.check, (request, response) => {
     response.sendFile(path.join(__dirname, '../../dashboard/build/index.html'));
 });
 
