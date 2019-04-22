@@ -1,0 +1,44 @@
+{
+    "materials": [
+        {
+            "name": "Matte",
+            "costPerArea": 0.3
+        },
+        {
+            "name": "Glossy",
+            "costPerArea": 0.2
+        },
+        {
+            "name": "Matte",
+            "costPerArea": 0.1
+        }
+    ],
+    "sizes": [
+        {
+            "height": 1000,
+            "width": 1000
+        },
+        {
+            "height": 100,
+            "width": 100
+        },
+        {
+            "height": 10,
+            "width": 10
+        }
+    ],
+    "content": {
+        "about": "## Hi, I am Danielle Petree, nice to meet you! ##\nPetree Prints was founded by Danielle Petree, who decided to take a leap of faith and pursued one of her passions, large format printing. Petree Prints was created as a need for a large format fine art photography printing in Gainesville, Florida. Petree Prints is a family run business and is dedicated to providing its clients with affordable, quality prints.\n## Business Contact ##\nPhone: (352)-316-0879\nEmail: petreeprinting@gmail.com\nAddress: 10251 Ne 120th Ave. Archer FL, 32618",
+        "faq": "## What materials do you offer? ##\nWe offer the following list of materials: Matte, Gloss, etc.\n## How large can my order be? ##\nAt the moment the largest possible size is: Xx by Xx\n## Can I pay with something other than PayPal? ##\nNo, as of now we only accept payments through PayPal.\n## How long will my order take? ##\nSmaller sized orders are estimated to take 24-48 hours. Bigger sized orders are estimated to take 3-5 business days."
+    },
+    "maxSize": {
+        "height": 1000,
+        "width": 1000
+    },
+    "active": true,
+    "paypal": {
+        "sandbox": true,
+        "client_id": "ARfUO2JwCX09RFOPwXx9a48Hif_jjs8eJyMbtjexXL6AeQQ07DwqOrJldxaQYQLi0RfKYty3zZTxbkIS",
+        "client_secret": "EOxv2c2mFKLqDFyms-MY1WlvL-84AOr6NcPRRmRU3gKzXGSi9Tm0x0fzqGOkiVd4zPXkfpkqFBS3cDSi"
+    }
+}
