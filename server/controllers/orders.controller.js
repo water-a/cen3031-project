@@ -34,6 +34,8 @@ exports.create = async (request, response) => {
 
     let cost = getEstimate(height, width, material);
 
+    assert(cost > 0);
+
     let image = request.files.image;
     let uploadStream = request.bucket.openUploadStream(image.name, {
         metadata: {
