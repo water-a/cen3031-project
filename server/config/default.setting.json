@@ -38,7 +38,7 @@
     "active": true,
     "paypal": {
         "sandbox": true,
-        "client_id": "ARfUO2JwCX09RFOPwXx9a48Hif_jjs8eJyMbtjexXL6AeQQ07DwqOrJldxaQYQLi0RfKYty3zZTxbkIS",
-        "client_secret": "EOxv2c2mFKLqDFyms-MY1WlvL-84AOr6NcPRRmRU3gKzXGSi9Tm0x0fzqGOkiVd4zPXkfpkqFBS3cDSi"
+        "client_id": "",
+        "client_secret": ""
     }
 }
