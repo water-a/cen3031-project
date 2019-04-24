@@ -124,6 +124,9 @@ exports.sizes.delete = (request, response) => {
     let height = request.params.height;
     let width = request.params.width;
 
+    assert(height > 0);
+    assert(width > 0);
+
     Setting.findOneAndUpdate(
         {}, 
         { 
